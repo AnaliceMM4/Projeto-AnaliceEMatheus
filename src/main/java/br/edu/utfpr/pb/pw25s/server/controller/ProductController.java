@@ -1,45 +1,34 @@
 package br.edu.utfpr.pb.pw25s.server.controller;
 
+import br.edu.utfpr.pb.pw25s.server.dto.ProductDTO;
 import br.edu.utfpr.pb.pw25s.server.model.Product;
-import br.edu.utfpr.pb.pw25s.server.repository.ProductRepository;
-import br.edu.utfpr.pb.pw25s.server.service.ProductService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
+import br.edu.utfpr.pb.pw25s.server.service.ICrudService;
+import br.edu.utfpr.pb.pw25s.server.service.IProductService;
+import org.modelmapper.ModelMapper;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("products")
-public class ProductController {
+public class ProductController extends CrudController<Product, ProductDTO, Long> {
 
-    private final ProductService productService;
+    private static IProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    private static ModelMapper modelMapper;
+
+    public ProductController(IProductService productService, ModelMapper modelMapper) {
+        super(Product.class, ProductDTO.class);
+        ProductController.productService = productService;
+        ProductController.modelMapper = modelMapper;
     }
 
-    @PostMapping
-    public ResponseEntity<Product>
-    create(@RequestBody @Valid Product product) {
-    productService.save(product);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("{id}")
-                .buildAndExpand(product.getId()).toUri();
-        return ResponseEntity.created(location).body(product);
+    @Override
+    protected ICrudService<Product, Long> getService() {
+        return productService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Product>> findAll(){
-        return ResponseEntity.ok(productService.findAll());
-    }
-
-    @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id){
-        productService.delete(id);
+    @Override
+    protected ModelMapper getModelMapper() {
+        return modelMapper;
     }
 }

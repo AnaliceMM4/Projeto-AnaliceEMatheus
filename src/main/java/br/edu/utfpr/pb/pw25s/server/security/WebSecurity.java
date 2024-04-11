@@ -31,7 +31,7 @@ public class WebSecurity {
 
     @Bean
     @SneakyThrows
-    public SecurityFilterChain filterChain(HttpSecurity http) {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder
                 .userDetailsService(authService)
