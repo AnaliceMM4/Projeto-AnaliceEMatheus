@@ -37,7 +37,7 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<GenericResponse> createUser(@Valid @RequestBody UserDTO user) {
-        System.out.println("aquiiiiiiiiiiiiiiii");
+ 
         User userEntity = modelMapper.map(user, User.class);
         System.out.println("User entity mapped: " + userEntity);
         if (userEntity.isEnabled()) {
