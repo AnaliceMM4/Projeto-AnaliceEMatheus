@@ -53,7 +53,7 @@ import org.springframework.security.web.SecurityFilterChain;
             http.authorizeHttpRequests((authorize) -> authorize
                     .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
                    // .requestMatchers(HttpMethod.POST, "/requests/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/requestsItens/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/requestItens/**").permitAll()
                     .requestMatchers("/h2-console/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/products/**").permitAll()

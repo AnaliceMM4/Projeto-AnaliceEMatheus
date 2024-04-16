@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import br.edu.utfpr.pb.pw25s.server.repository.RequestRepository;
 import br.edu.utfpr.pb.pw25s.server.service.IRequestService;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  *
@@ -20,7 +23,7 @@ public class RequestServiceImpl extends CrudServiceImpl<Request, Long> implement
     private RequestRepository requestRepository;
 
     public RequestServiceImpl(RequestRepository pedidoRepository) {
-        this.requestRepository= pedidoRepository;
+        this.requestRepository = pedidoRepository;
     }
 
     @Override
@@ -28,4 +31,19 @@ public class RequestServiceImpl extends CrudServiceImpl<Request, Long> implement
         return requestRepository;
     }
 
+    
+    /*public Request saveOrAlter(Request entity, Long id) {
+
+        if (!requestRepository.existsById(id)) {
+            LocalDate data = LocalDate.now();
+            Date date = Date.from(data.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            entity.setData(date);
+            return super.save(entity);
+        } else {
+
+           
+        }
+
+    }
+*/
 }

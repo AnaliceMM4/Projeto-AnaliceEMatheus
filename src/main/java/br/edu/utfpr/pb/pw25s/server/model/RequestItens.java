@@ -44,9 +44,9 @@ public class RequestItens {
     @ManyToOne
     @JoinColumn(name ="product_id")
     private Product product;
- 
+
     private BigDecimal preco;
-    
+    @NotNull
     private Integer quantidade;
 
 }

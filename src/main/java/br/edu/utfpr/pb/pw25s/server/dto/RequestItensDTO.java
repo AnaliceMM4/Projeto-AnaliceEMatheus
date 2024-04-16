@@ -6,6 +6,7 @@ package br.edu.utfpr.pb.pw25s.server.dto;
 
 import br.edu.utfpr.pb.pw25s.server.model.Product;
 import br.edu.utfpr.pb.pw25s.server.model.Request;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,15 +27,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RequestItensDTO {
 
+    
     private long id;
 
-    @NotNull
+    @JsonIgnore
     private Request request;
-    @NotNull
+     @NotNull
     private Product product;
-    @NotNull    
+    @JsonIgnore  
     private BigDecimal preco;
-    
+     @NotNull
     private Integer quantidade;
 
 }
