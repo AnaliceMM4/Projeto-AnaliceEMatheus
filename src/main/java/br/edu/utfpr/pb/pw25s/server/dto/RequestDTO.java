@@ -5,22 +5,26 @@
 package br.edu.utfpr.pb.pw25s.server.dto;
 
 import br.edu.utfpr.pb.pw25s.server.model.User;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import java.util.Date;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author mathe
  */
 @Data
-public class PedidoDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class RequestDTO {
 
     private Long id;
     @NotNull
     private Date data;
-    @NotNull
-    private Long userId;
+    @JsonIgnore
+    private UserDTO user;
+
 }

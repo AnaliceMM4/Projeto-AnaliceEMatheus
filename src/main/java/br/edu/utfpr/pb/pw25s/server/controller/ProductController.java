@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/products")
 public class ProductController extends CrudController<Product, ProductDTO, Long> {
 
-    private static ProductServiceImpl productService;
+    private final ProductServiceImpl productService;
 
-    private static ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public ProductController(ProductServiceImpl productService, ModelMapper modelMapper) {
         super(Product.class, ProductDTO.class);
-        ProductController.productService = productService;
-        ProductController.modelMapper = modelMapper;
+        this.productService = productService;
+        this.modelMapper = modelMapper;
     }
 
     @Override

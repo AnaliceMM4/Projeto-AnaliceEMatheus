@@ -11,6 +11,7 @@ package br.edu.utfpr.pb.pw25s.server.controller;
 import br.edu.utfpr.pb.pw25s.server.dto.UserDTO;
 import br.edu.utfpr.pb.pw25s.server.model.User;
 import br.edu.utfpr.pb.pw25s.server.service.IUserService;
+import br.edu.utfpr.pb.pw25s.server.service.impl.UserServiceImpl;
 import br.edu.utfpr.pb.pw25s.server.shared.GenericResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,10 +27,10 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/users")
 public class UserController {
 
-    private final IUserService userService;
+    private final UserServiceImpl userService;
     private final ModelMapper modelMapper;
 
-    public UserController(IUserService userService,
+    public UserController(UserServiceImpl userService,
             ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;

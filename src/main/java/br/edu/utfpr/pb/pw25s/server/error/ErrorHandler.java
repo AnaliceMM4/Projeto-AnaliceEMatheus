@@ -9,23 +9,23 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
-@RestController
-public class ErrorHandler implements ErrorController {
-    private ErrorAttributes errorAttributes;
+    @RestController
+    public class ErrorHandler implements ErrorController {
+        private ErrorAttributes errorAttributes;
 
-    public ErrorHandler(ErrorAttributes errorAttributes) {
-        this.errorAttributes = errorAttributes;
-    }
+        public ErrorHandler(ErrorAttributes errorAttributes) {
+            this.errorAttributes = errorAttributes;
+        }
 
-    @RequestMapping("/error")
-    public ApiError handlerError(WebRequest webRequest) {
-        Map<String, Object> attributes = errorAttributes.getErrorAttributes(
-                webRequest,
-                ErrorAttributeOptions.of(ErrorAttributeOptions.Include.MESSAGE));
-        return ApiError.builder()
-                .message((String) attributes.get("message"))
-                .url((String) attributes.get("path"))
-                .status((Integer) attributes.get("status"))
-                .build();
+        @RequestMapping("/error")
+        public ApiError handlerError(WebRequest webRequest) {
+            Map<String, Object> attributes = errorAttributes.getErrorAttributes(
+                    webRequest,
+                    ErrorAttributeOptions.of(ErrorAttributeOptions.Include.MESSAGE));
+            return ApiError.builder()
+                    .message((String) attributes.get("message"))
+                    .url((String) attributes.get("path"))
+                    .status((Integer) attributes.get("status"))
+                    .build();
+        }
     }
-}

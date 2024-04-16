@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("categories")
 public class CategoryController extends CrudController<Category, CategoryDTO, Long> {
 
-    private static ICategoryService categoryService;
-    private static ModelMapper modelMapper;
+    private final ICategoryService categoryService;
+    private final ModelMapper modelMapper;
 
     public CategoryController(ICategoryService categoryService,
             ModelMapper modelMapper) {
         super(Category.class, CategoryDTO.class);
-        CategoryController.categoryService = categoryService;
-        CategoryController.modelMapper = modelMapper;
+        this.categoryService = categoryService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     protected ICrudService<Category, Long> getService() {
-        return CategoryController.categoryService;
+        return categoryService;
     }
 
     @Override
     protected ModelMapper getModelMapper() {
-        return CategoryController.modelMapper;
+        return modelMapper;
     }
 }

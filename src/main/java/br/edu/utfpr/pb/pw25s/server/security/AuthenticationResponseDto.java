@@ -1,6 +1,5 @@
 package br.edu.utfpr.pb.pw25s.server.security;
 
-
 import lombok.*;
 
 @Getter
@@ -9,5 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class AuthenticationResponseDto {
-    private String dto;
+
+    private String token;
 }

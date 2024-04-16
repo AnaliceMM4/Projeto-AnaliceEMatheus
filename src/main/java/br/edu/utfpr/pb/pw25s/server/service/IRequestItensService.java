@@ -4,13 +4,15 @@
  */
 package br.edu.utfpr.pb.pw25s.server.service;
 
-import br.edu.utfpr.pb.pw25s.server.dto.UserDTO;
-import br.edu.utfpr.pb.pw25s.server.model.User;
+import br.edu.utfpr.pb.pw25s.server.model.RequestItens;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author mathe
  */
-    public interface IUserService  extends ICrudService<User, Long>{
 
-    }
+
+public interface IRequestItensService extends ICrudService<RequestItens, Long>{
+    
+}

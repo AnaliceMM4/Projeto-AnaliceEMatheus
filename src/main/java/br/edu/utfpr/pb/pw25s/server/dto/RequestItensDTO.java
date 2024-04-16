@@ -2,43 +2,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.edu.utfpr.pb.pw25s.server.model;
+package br.edu.utfpr.pb.pw25s.server.dto;
 
-import jakarta.persistence.Entity;
+import br.edu.utfpr.pb.pw25s.server.model.Product;
+import br.edu.utfpr.pb.pw25s.server.model.Request;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author mathe
  */
-@Entity
-@Table(name = "tb_pedido")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@Builder
-public class Pedido {
+public class RequestItensDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+
     @NotNull
-    private Date data;
+    private Request request;
     @NotNull
-    private Long userId;
+    private Product product;
+    @NotNull    
+    private BigDecimal preco;
+    
+    private Integer quantidade;
 
 }
