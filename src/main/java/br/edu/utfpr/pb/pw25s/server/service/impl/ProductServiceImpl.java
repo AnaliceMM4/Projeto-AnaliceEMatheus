@@ -11,6 +11,7 @@ import br.edu.utfpr.pb.pw25s.server.service.IProductService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,7 @@ public class ProductServiceImpl extends CrudServiceImpl<Product, Long> implement
         List<ProductDTO> productsDTOList = new ArrayList<>();
         for (Product product : productsList) {
             ProductDTO productDTO = new ProductDTO();
+            productDTO.setId(product.getId());
             productDTO.setName(product.getName());
             productDTO.setPrice(product.getPrice());
             productDTO.setUrlImage(product.getUrlImage());

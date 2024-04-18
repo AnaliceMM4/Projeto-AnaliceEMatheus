@@ -56,22 +56,12 @@ public class RequestItensServiceImpl extends CrudServiceImpl<RequestItens, Long>
         RequestItens productItems = requestItensRepository.findByProductId(entity.getProduct().getId());
         Request request = entity.getRequest();
 
-        if (request == null) {
-            LocalDate data = LocalDate.now();
-            Date date = Date.from(data.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-            request = new Request();
-            request.setData(date);
-            requestRepository.save(request);
-            entity.setRequest(request);
-        } else {
-            entity.setRequest(request);
-        }
-
+       
         entity.setPreco(product.getPrice());
 
         if (productItems != null) {
             entity.setId(productItems.getId());
+            entity.setRequest(productItems.getRequest());
             entity.setQuantidade(entity.getQuantidade() + productItems.getQuantidade());
             entity.setPreco(product.getPrice().multiply(BigDecimal.valueOf(entity.getQuantidade())));
         }

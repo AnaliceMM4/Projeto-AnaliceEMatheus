@@ -27,16 +27,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RequestItensDTO {
 
-    
     private long id;
 
-    @JsonIgnore
     private Request request;
-     @NotNull
-    private Product product;
-    @JsonIgnore  
+    private ProductDTO product;
     private BigDecimal preco;
-     @NotNull
     private Integer quantidade;
 
 }

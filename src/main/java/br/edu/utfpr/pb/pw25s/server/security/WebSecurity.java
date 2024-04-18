@@ -17,65 +17,66 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
+@EnableWebSecurity
+@Configuration
+public class WebSecurity {
 
-    @EnableWebSecurity
-    @Configuration
-    public class WebSecurity {
-        private final AuthService authService;
-        private final AuthenticationEntryPoint authenticationEntryPoint;
+    private final AuthService authService;
+    private final AuthenticationEntryPoint authenticationEntryPoint;
 
-        public WebSecurity(AuthService authService, AuthenticationEntryPoint authenticationEntryPoint) {
-            this.authService = authService;
-            this.authenticationEntryPoint = authenticationEntryPoint;
-        }
-
-        @Bean
-        @SneakyThrows
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-            authenticationManagerBuilder
-                    .userDetailsService(authService)
-                    .passwordEncoder(passwordEncoder());
-
-            AuthenticationManager authenticationManager =
-                    authenticationManagerBuilder.build();
-
-            //Configuração para o h2 funcionar com o Spring Security
-            http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
-
-            http.csrf(AbstractHttpConfigurer::disable);
-
-            http.exceptionHandling(exceptionHandLing ->
-                    exceptionHandLing.authenticationEntryPoint(authenticationEntryPoint));
-
-            http.cors(AbstractHttpConfigurer::disable);
-
-            http.authorizeHttpRequests((authorize) -> authorize
-                    .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
-                   // .requestMatchers(HttpMethod.POST, "/requests/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/requestItens/**").permitAll()
-                    .requestMatchers("/h2-console/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
-                    .anyRequest().authenticated()
-            );
-            http.authenticationManager(authenticationManager)
-                    .addFilter(new JWTAuthenticationFilter(authenticationManager,
-                            authService)
-                    )
-                    .addFilter(new JWTAuthorizationFilter(authenticationManager,
-                            authService)
-                    )
-                    .sessionManagement(sessionManagement ->
-                            sessionManagement.sessionCreationPolicy(
-                                    SessionCreationPolicy.STATELESS)
-                    );
-            return http.build();
-
-        }
-
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
-        }
+    public WebSecurity(AuthService authService, AuthenticationEntryPoint authenticationEntryPoint) {
+        this.authService = authService;
+        this.authenticationEntryPoint = authenticationEntryPoint;
     }
+
+    @Bean
+    @SneakyThrows
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder
+                .userDetailsService(authService)
+                .passwordEncoder(passwordEncoder());
+
+        AuthenticationManager authenticationManager
+                = authenticationManagerBuilder.build();
+
+        //Configuração para o h2 funcionar com o Spring Security
+        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
+
+        http.csrf(AbstractHttpConfigurer::disable);
+
+        http.exceptionHandling(exceptionHandLing
+                -> exceptionHandLing.authenticationEntryPoint(authenticationEntryPoint));
+
+        http.cors(AbstractHttpConfigurer::disable);
+
+        http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
+                // .requestMatchers(HttpMethod.POST, "/requests/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/requestItens/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/requestItens/**").permitAll()
+                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
+                .anyRequest().authenticated()
+        );
+        http.authenticationManager(authenticationManager)
+                .addFilter(new JWTAuthenticationFilter(authenticationManager,
+                        authService)
+                )
+                .addFilter(new JWTAuthorizationFilter(authenticationManager,
+                        authService)
+                )
+                .sessionManagement(sessionManagement
+                        -> sessionManagement.sessionCreationPolicy(
+                        SessionCreationPolicy.STATELESS)
+                );
+        return http.build();
+
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}

@@ -31,17 +31,16 @@ public class LoginController {
         this.authService = authService;
     }
 
-    
-   /* @GetMapping("/user-info")
-    public ResponseEntity<UserDTO> getUserInfo(@Valid @RequestBody UserDTO user) {
-
-        if (user != null) {
-            User userRepo = (User) authService.loadUserByUsername(user.getUsername());
-            //UserDTO userDTO = new UserDTO(userRepo);
+    @GetMapping("/user-info")
+    public ResponseEntity<UserDTO> getUserInfo(Principal principal) {
+        if (principal != null) {
+            String username = principal.getName();
+            User userRepo = (User) authService.loadUserByUsername(username);
+            UserDTO userDTO = new UserDTO(userRepo); 
+            userDTO.setDisplayName(userRepo.getDisplayName());
             return ResponseEntity.ok(userDTO);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
-*/
 }
