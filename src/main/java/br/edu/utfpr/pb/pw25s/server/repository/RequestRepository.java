@@ -4,7 +4,7 @@
  */
 package br.edu.utfpr.pb.pw25s.server.repository;
 
-import br.edu.utfpr.pb.pw25s.server.model.Pedido;
+import br.edu.utfpr.pb.pw25s.server.model.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 
-public interface PedidoRepository  extends JpaRepository<Pedido, Long>{
+public interface RequestRepository extends JpaRepository<Request, Long>{
     
 }

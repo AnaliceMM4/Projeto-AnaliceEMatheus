@@ -4,14 +4,13 @@
  */
 package br.edu.utfpr.pb.pw25s.server.service;
 
-import br.edu.utfpr.pb.pw25s.server.model.Pedido;
-import br.edu.utfpr.pb.pw25s.server.repository.PedidoRepository;
+import br.edu.utfpr.pb.pw25s.server.model.Request;
 
 /**
  *
  * @author mathe
  */
-public interface IPedidoService extends ICrudService<Pedido, Long> {
+public interface IPedidoService extends ICrudService<Request, Long> {
     
  
    

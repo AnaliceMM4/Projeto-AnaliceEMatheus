@@ -19,8 +19,8 @@ public class LoginController {
         this.authService = authService;
     }
 
-    @GetMapping("/user-info")
+   /* @GetMapping("/user-info")
     public UserDTO getUserInfo(Principal principal) {
         return new UserDTO((User) authService.loadUserByUsername(principal.getName()));
-    }
+    }*/
 }

@@ -29,8 +29,11 @@ public class UserDTO {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{br.edu.utfpr.pb.pw26s.server.user.password.constraints.Pattern.message}")
     private String password;
 
-    public UserDTO() {
-    }
+    //Comentei aqui porque tava dando conflito com o NoArgsConstructor
+    //Já temos a anotação que vai ser mantida para permitir
+    // que o Lombok gere automaticamente o construtor padrão
+    /*public UserDTO() {
+    }*/
 
     public UserDTO(User user) {
         this.id = user.getId();
