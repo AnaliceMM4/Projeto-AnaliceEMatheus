@@ -5,15 +5,14 @@
 package br.edu.utfpr.pb.pw25s.server.controller;
 
 import br.edu.utfpr.pb.pw25s.server.dto.RequestDTO;
-import br.edu.utfpr.pb.pw25s.server.dto.UserDTO;
 import br.edu.utfpr.pb.pw25s.server.model.Request;
 import br.edu.utfpr.pb.pw25s.server.model.User;
 import br.edu.utfpr.pb.pw25s.server.service.AuthService;
 import br.edu.utfpr.pb.pw25s.server.service.ICrudService;
 import br.edu.utfpr.pb.pw25s.server.service.impl.RequestServiceImpl;
 import br.edu.utfpr.pb.pw25s.server.shared.GenericResponse;
-import jakarta.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,37 +49,43 @@ public class RequestController extends CrudController<Request, RequestDTO, Long>
         return modelMapper;
     }
 
-    /* @PostMapping("/add")
-    public ResponseEntity<GenericResponse> add(@Valid @RequestBody RequestDTO request) {
+    @GetMapping("/add")
+    public ResponseEntity<GenericResponse> add(Principal principal) {
+        GenericResponse genericResponse = new GenericResponse();
+        if (principal != null) {
 
-        Request requestEntity = modelMapper.map(request, Request.class);
-        System.out.println("Request entity mapped: " + requestEntity);
-        if (requestEntity != null) {
+            String username = principal.getName();
+            User user = (User) authService.loadUserByUsername(username);
+
+            Request requestEntity = new Request();
+            requestEntity.setUser(user);
+
+            System.out.println("Request entity mapped: " + requestEntity);
             requestService.save(requestEntity);
-            GenericResponse genericResponse = new GenericResponse();
+
             genericResponse.setMessage("Request saved.");
 
             return ResponseEntity.status(HttpStatus.CREATED).body(genericResponse);
-        } else {
-            return ResponseEntity.noContent().build();
-        }
-    }
-     */
-    @PostMapping("/finalizarPedido")
-    public ResponseEntity<GenericResponse> finalizarPedido(@Valid @RequestBody RequestDTO request) {
-        
-        Request requestEntity = modelMapper.map(request, Request.class);
 
-        System.out.println("Request entity mapped: " + requestEntity);
-        if (requestEntity != null) {
-            requestService.save(requestEntity);
-            GenericResponse genericResponse = new GenericResponse();
-            genericResponse.setMessage("Request saved.");
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(genericResponse);
         } else {
-            return ResponseEntity.noContent().build();
+            genericResponse.setMessage("Erro na autenticação");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(genericResponse);
         }
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<?> listarDetalhesPedido(Principal principal) {
+       
+        if (principal != null) {
+            String username = principal.getName();
+            User user = (User) authService.loadUserByUsername(username);
+            List<RequestDTO> pedidos = requestService.findRequestsByUser(user);
+            
+            return ResponseEntity.ok(pedidos);
+        } else {
+             GenericResponse genericResponse = new GenericResponse();
+            genericResponse.setMessage("Erro na autenticação");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(genericResponse);
+        }
+    }
 }

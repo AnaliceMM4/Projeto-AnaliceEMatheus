@@ -5,14 +5,15 @@
 package br.edu.utfpr.pb.pw25s.server.repository;
 
 import br.edu.utfpr.pb.pw25s.server.model.Request;
+import br.edu.utfpr.pb.pw25s.server.model.User;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author mathe
  */
+public interface RequestRepository extends JpaRepository<Request, Long> {
 
-
-public interface RequestRepository  extends JpaRepository<Request, Long>{
-    
+    List<Request> findByUser(User user);
 }

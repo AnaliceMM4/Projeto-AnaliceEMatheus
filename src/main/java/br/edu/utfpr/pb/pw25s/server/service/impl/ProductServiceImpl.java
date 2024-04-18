@@ -4,7 +4,9 @@
  */
 package br.edu.utfpr.pb.pw25s.server.service.impl;
 
+import br.edu.utfpr.pb.pw25s.server.dto.CategoryDTO;
 import br.edu.utfpr.pb.pw25s.server.dto.ProductDTO;
+import br.edu.utfpr.pb.pw25s.server.model.Category;
 import br.edu.utfpr.pb.pw25s.server.model.Product;
 import br.edu.utfpr.pb.pw25s.server.repository.ProductRepository;
 import br.edu.utfpr.pb.pw25s.server.service.IProductService;
@@ -35,14 +37,19 @@ public class ProductServiceImpl extends CrudServiceImpl<Product, Long> implement
 
     public List<ProductDTO> findAllProducts() {
 
-        List<Product> productsList = productRepository.findAll();
+        List<Product> productsList = productRepository.findAll();   
         List<ProductDTO> productsDTOList = new ArrayList<>();
         for (Product product : productsList) {
+            CategoryDTO category = new CategoryDTO();
             ProductDTO productDTO = new ProductDTO();
             productDTO.setId(product.getId());
             productDTO.setName(product.getName());
             productDTO.setPrice(product.getPrice());
             productDTO.setUrlImage(product.getUrlImage());
+            category.setId(product.getCategory().getId());
+            category.setName(product.getCategory().getName());
+            productDTO.setCategory(category);
+            productDTO.setDescription(product.getDescription());
             productsDTOList.add(productDTO);
         }
 

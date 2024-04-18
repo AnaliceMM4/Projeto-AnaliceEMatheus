@@ -4,10 +4,12 @@
  */
 package br.edu.utfpr.pb.pw25s.server.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import br.edu.utfpr.pb.pw25s.server.annotation.UniqueUsername;
+import br.edu.utfpr.pb.pw25s.server.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
-import java.util.Date;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,14 +21,26 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class RequestDTO {
+public class UserViewDTO {
 
     private Long id;
-    
-    @JsonFormat(pattern="dd/MM/yyyy")
-    private Date data;
+
+    @UniqueUsername
     @NotNull
-    private UserViewDTO user;
+    @Size(min = 4, max = 50)
+    private String username;
+
+    @JsonIgnore
+    @Size(min = 4, max = 50)
+    private String displayName;
+
+    @JsonIgnore
+    @Size(min = 6)
+    private String password;
+
+    public UserViewDTO(User user) {
+        this.username = user.getUsername();
+
+    }
 
 }

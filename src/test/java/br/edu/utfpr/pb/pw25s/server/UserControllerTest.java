@@ -47,7 +47,7 @@ public class UserControllerTest {
         User user = new User();
         user.setUsername("test-user");
         user.setDisplayName("test-Display");
-        user.setPassword("Password");
+        user.setPassword("P4ssw0rd!");
 
         ResponseEntity<Object> response =
                 testRestTemplate.postForEntity("/users", createValidUser(), Object.class);
@@ -152,7 +152,7 @@ public class UserControllerTest {
         return User.builder()
                 .username("test-user")
                 .displayName("test-Display")
-                .password("Password").build();
+                .password("P4ssw0rd!").build();
     }
 
 

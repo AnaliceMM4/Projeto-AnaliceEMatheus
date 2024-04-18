@@ -29,14 +29,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private AuthService authService;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
-                                   AuthService authService) {
+            AuthService authService) {
         this.authenticationManager = authenticationManager;
         this.authService = authService;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
-                                                HttpServletResponse response)
+            HttpServletResponse response)
             throws AuthenticationException {
 
         try {
@@ -76,9 +76,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
-                                            HttpServletResponse response,
-                                            FilterChain chain,
-                                            Authentication authResult) throws IOException, ServletException {
+            HttpServletResponse response,
+            FilterChain chain,
+            Authentication authResult) throws IOException, ServletException {
 
         User user = (User) authService.loadUserByUsername(authResult.getName());
         // o método create() da classe JWT é utilizado para criação de um novo token JWT
@@ -87,7 +87,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withSubject(authResult.getName())
                 //a data de validade do token é a data atual mais o valor armazenado na constante EXPIRATION_TIME, nesse caso 1 dia
                 .withExpiresAt(
-                        new Date(System.currentTimeMillis()  + SecurityConstants.EXPIRATION_TIME)
+                        new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME)
                 )
                 //Por fim é informado o algoritmo utilizado para assinar o token e por parâmetro a chave utilizada para assinatura. O Secret também pode ser alterado na classe SecurityConstants que armazena alguns dados de configuração do Spring Security
                 .sign(Algorithm.HMAC512(SecurityConstants.SECRET));

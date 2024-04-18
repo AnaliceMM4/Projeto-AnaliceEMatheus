@@ -56,7 +56,7 @@ public class RequestItensController extends CrudController<RequestItens, Request
         return modelMapper;
     }
 
-    @PostMapping("/adicionarNoCarrinho")
+    /*@PostMapping("/adicionarNoCarrinho")
     public ResponseEntity<GenericResponse> add(@Valid @RequestBody RequestItensDTO requestItens) {
 
         RequestItens requestItensEntity = modelMapper.map(requestItens, RequestItens.class);
@@ -72,8 +72,10 @@ public class RequestItensController extends CrudController<RequestItens, Request
             return ResponseEntity.noContent().build();
         }
     }
-
-    @GetMapping("/listarCarrinho")
+*/
+    
+    
+    @GetMapping("/listarDetalhesDoPedido")
     public ResponseEntity<?> listarCarrinho() {
         List<RequestItens> requestItens = requestItensService.findAll();
         List<RequestItensDTO> requestItensDTOList = requestItens.stream()
