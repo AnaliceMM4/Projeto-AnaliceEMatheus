@@ -11,6 +11,7 @@ import br.edu.utfpr.pb.pw25s.server.repository.ProductRepository;
 import br.edu.utfpr.pb.pw25s.server.repository.RequestItensRepository;
 import br.edu.utfpr.pb.pw25s.server.service.IRequestItensService;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -55,4 +56,5 @@ public class RequestItensServiceImpl extends CrudServiceImpl<RequestItens, Long>
 
         return super.save(entity);
     }
+
 }

@@ -6,13 +6,12 @@ package br.edu.utfpr.pb.pw25s.server.service.impl;
 
 import br.edu.utfpr.pb.pw25s.server.dto.CategoryDTO;
 import br.edu.utfpr.pb.pw25s.server.dto.ProductDTO;
-import br.edu.utfpr.pb.pw25s.server.model.Category;
+import br.edu.utfpr.pb.pw25s.server.dto.ProductViewDTO;
 import br.edu.utfpr.pb.pw25s.server.model.Product;
 import br.edu.utfpr.pb.pw25s.server.repository.ProductRepository;
 import br.edu.utfpr.pb.pw25s.server.service.IProductService;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,7 @@ public class ProductServiceImpl extends CrudServiceImpl<Product, Long> implement
 
     public List<ProductDTO> findAllProducts() {
 
-        List<Product> productsList = productRepository.findAll();   
+        List<Product> productsList = productRepository.findAll();
         List<ProductDTO> productsDTOList = new ArrayList<>();
         for (Product product : productsList) {
             CategoryDTO category = new CategoryDTO();
@@ -57,10 +56,18 @@ public class ProductServiceImpl extends CrudServiceImpl<Product, Long> implement
 
     }
 
-    @Override
-    public Product findOne(Long id) {
-
-        return super.findOne(id);
-    }
-
+   public List<ProductViewDTO> listByCategory(Long categoryId) {
+    List<Product> productsList = productRepository.findByCategoryId(categoryId);
+    List<ProductViewDTO> productsDTOList = productsList.stream()
+            .map(product -> {
+                ProductViewDTO productDTO = new ProductViewDTO();
+                productDTO.setId(product.getId());
+                productDTO.setName(product.getName());
+                productDTO.setPrice(product.getPrice());
+                productDTO.setUrlImage(product.getUrlImage());
+                return productDTO;
+            })
+            .collect(Collectors.toList());
+    return productsDTOList;
+}
 }

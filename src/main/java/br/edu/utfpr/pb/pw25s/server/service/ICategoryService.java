@@ -4,6 +4,7 @@
  */
 package br.edu.utfpr.pb.pw25s.server.service;
 
+import br.edu.utfpr.pb.pw25s.server.dto.CategoryDTO;
 import br.edu.utfpr.pb.pw25s.server.model.Category;
 import java.io.Serializable;
 import org.springframework.stereotype.Service;

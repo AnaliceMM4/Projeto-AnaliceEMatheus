@@ -22,5 +22,11 @@ insert into tb_product (name, description, price, category_id) values ('TV LCD 7
 insert into tb_product (name, description, price, category_id) values ('Fogão 6 Bocas','Fogão 6 Bocas em aço inox, ...', 799.99,3);
 insert into tb_product (name, description, price, category_id) values ('Roteador Wi-Fi 5.4GhZ','Roteador Wi-Fi 5.4GhZ, 6 antenas...',1299.0,1);
 
-INSERT INTO tb_user(display_name, username, password) VALUES ('Administrador', 'admin','$2a$10$.PVIfB07x.SfMYTcToxL0.yxcLWU0GbS2NUO1W1QAvqMm/TsFhVem');
+INSERT INTO tb_user(display_name, username, password) VALUES ('Administrador', 'admin','$2a$12$2h2wyeyCV5XyuQS8PdPQ9e/y.KJ2y/o3UEJxhqXGSe.QPVi6gm1nO');
 INSERT INTO tb_user(display_name, username, password) VALUES ('Teste', 'test','$2a$10$.PVIfB07x.SfMYTcToxL0.yxcLWU0GbS2NUO1W1QAvqMm/TsFhVem');
+
+
+INSERT INTO tb_request(data,user_id) VALUES('2021-04-20',1);
+
+INSERT INTO tb_request_itens(request_id,product_id,preco,quantidade) VALUES(1,1,1990.0,1);
+INSERT INTO tb_request_itens(request_id,product_id,preco,quantidade) VALUES(1,2,398.0,2);

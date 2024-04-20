@@ -5,6 +5,7 @@
 package br.edu.utfpr.pb.pw25s.server.repository;
 
 import br.edu.utfpr.pb.pw25s.server.model.RequestItens;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,6 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RequestItensRepository extends JpaRepository<RequestItens, Long>  {
 
     RequestItens findByProductId(Long id);
-    RequestItens findByRequestId(Long id);
+    List<RequestItens> findByRequestId(Long id);
     
 }

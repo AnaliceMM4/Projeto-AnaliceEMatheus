@@ -1,6 +1,7 @@
 package br.edu.utfpr.pb.pw25s.server.controller;
 
 import br.edu.utfpr.pb.pw25s.server.dto.ProductDTO;
+import br.edu.utfpr.pb.pw25s.server.dto.ProductViewDTO;
 import br.edu.utfpr.pb.pw25s.server.model.Product;
 import br.edu.utfpr.pb.pw25s.server.service.ICrudService;
 import br.edu.utfpr.pb.pw25s.server.service.IProductService;
@@ -41,6 +42,7 @@ public class ProductController extends CrudController<Product, ProductDTO, Long>
     public ResponseEntity<?> searchProducts() {
 
         List<ProductDTO> productsList = productService.findAllProducts();
+        
         if (productsList != null) {
             return ResponseEntity.ok(productsList);
         } else {
@@ -51,6 +53,23 @@ public class ProductController extends CrudController<Product, ProductDTO, Long>
     @GetMapping("/products/{id}")
     ResponseEntity<?> searchOneProduct(@PathVariable Long id) {
         Product product = productService.findOne(id);
-        return ResponseEntity.ok(product);
+        if (product != null) {
+
+            return ResponseEntity.ok(product);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
+    @GetMapping("/categories/{categoryId}")
+    ResponseEntity<List<ProductViewDTO>> searchByCategory(@PathVariable Long categoryId) {
+        List<ProductViewDTO> productsList = productService.listByCategory(categoryId);
+        if (productsList != null) {
+
+            return ResponseEntity.ok(productsList);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
 }

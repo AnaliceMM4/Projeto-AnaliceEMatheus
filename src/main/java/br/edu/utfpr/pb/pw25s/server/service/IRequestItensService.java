@@ -5,7 +5,7 @@
 package br.edu.utfpr.pb.pw25s.server.service;
 
 import br.edu.utfpr.pb.pw25s.server.model.RequestItens;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 /**
  *
@@ -14,5 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 public interface IRequestItensService extends ICrudService<RequestItens, Long>{
+    
+    
     
 }

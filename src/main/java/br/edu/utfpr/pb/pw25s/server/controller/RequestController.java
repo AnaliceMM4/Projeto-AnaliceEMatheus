@@ -5,7 +5,9 @@
 package br.edu.utfpr.pb.pw25s.server.controller;
 
 import br.edu.utfpr.pb.pw25s.server.dto.RequestDTO;
+import br.edu.utfpr.pb.pw25s.server.dto.RequestItensDTO;
 import br.edu.utfpr.pb.pw25s.server.model.Request;
+import br.edu.utfpr.pb.pw25s.server.model.RequestItens;
 import br.edu.utfpr.pb.pw25s.server.model.User;
 import br.edu.utfpr.pb.pw25s.server.service.AuthService;
 import br.edu.utfpr.pb.pw25s.server.service.ICrudService;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 public class RequestController extends CrudController<Request, RequestDTO, Long> {
 
     private final RequestServiceImpl requestService;
+
     @Autowired
     private final AuthService authService;
     private final ModelMapper modelMapper;
@@ -74,18 +77,29 @@ public class RequestController extends CrudController<Request, RequestDTO, Long>
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> listarDetalhesPedido(Principal principal) {
-       
+    public ResponseEntity<?> requestList(Principal principal) {
+
         if (principal != null) {
             String username = principal.getName();
             User user = (User) authService.loadUserByUsername(username);
-            List<RequestDTO> pedidos = requestService.findRequestsByUser(user);
-            
-            return ResponseEntity.ok(pedidos);
+            List<RequestDTO> requests = requestService.findRequestsByUser(user);
+
+            return ResponseEntity.ok(requests);
         } else {
-             GenericResponse genericResponse = new GenericResponse();
+            GenericResponse genericResponse = new GenericResponse();
             genericResponse.setMessage("Erro na autenticação");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(genericResponse);
+        }
+    }
+
+    @GetMapping("/requestItens/{requestId}")
+    public ResponseEntity<?> requestDetails(@PathVariable Long requestId) {
+        List<RequestItensDTO> requestItensList = requestService.findRequestItensById(requestId);
+        if (requestItensList != null) {
+
+            return ResponseEntity.ok(requestItensList);
+        } else {
+            return ResponseEntity.noContent().build();
         }
     }
 }

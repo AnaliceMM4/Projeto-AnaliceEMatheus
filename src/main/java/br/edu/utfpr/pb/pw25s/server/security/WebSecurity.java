@@ -54,7 +54,7 @@ public class WebSecurity {
                 .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
                 // .requestMatchers(HttpMethod.POST, "/requests/**").permitAll()
                 //.requestMatchers(HttpMethod.POST, "/requestItens/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/requestItens/**").permitAll()
+                //.requestMatchers(HttpMethod.GET, "/requestItens/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
