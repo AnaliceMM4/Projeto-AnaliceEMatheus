@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.edu.utfpr.pb.pw25s.server.TodosTestes
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.534 s -- in br.edu.utfpr.pb.pw25s.server.TodosTestes
