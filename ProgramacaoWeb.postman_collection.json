@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "5ad80146-b586-47fd-9bb2-3ed1a0b4b78c",
+		"name": "ProgramacaoWeb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33395257"
+	},
+	"item": [
+		{
+			"name": "users/create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"displayName\":\"test-Display\",\r\n    \"username\": \"matheus\",\r\n    \"password\":\"P4ssw0rd!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/users/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"users",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "pt-BR",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"username\": \"admin\",\r\n        \"password\": \"admin\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products/searchProducts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/products/searchProducts",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"products",
+						"searchProducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products/id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/products/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products/categories/{categoryId}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/products/categories/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"products",
+						"categories",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request/add",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXRoZXVzIiwiZXhwIjoxNzEzNTMyMDg3fQ.uetGyjayG0ueFm0g3YsNU58GYiRhhk-dpkqndQGGRBZkn8Tv1GA6N0Td2EeytfMGePRJAbTaoaV1lWUYvJ4Uag",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/requests/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"requests",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request/list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXRoZXVzIiwiZXhwIjoxNzEzNTM1OTY5fQ.hcVTZoCIGWcQECSpILFJQtd5pY6AZNilqsgjtVPuT6MXte6f5L4FMgiBsJRrX4RRogbNMxVDb7PxwhaBCoM6jg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/requests/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"requests",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request/requestsItens/{requestId}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMzcxNjMyMH0.WmlkHHjYDnApRAvDugZRO-EO83zzMiWf6rXIYAFdKCJQJyJhGIktiKT8Rof7h_fKu7scvr2wuuRAtwER0frgVQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8025/requests/requestItens/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8025",
+					"path": [
+						"requests",
+						"requestItens",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
