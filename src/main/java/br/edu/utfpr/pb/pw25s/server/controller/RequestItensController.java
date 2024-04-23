@@ -8,11 +8,16 @@ import br.edu.utfpr.pb.pw25s.server.dto.RequestItensDTO;
 import br.edu.utfpr.pb.pw25s.server.model.RequestItens;
 import br.edu.utfpr.pb.pw25s.server.service.ICrudService;
 import br.edu.utfpr.pb.pw25s.server.service.impl.RequestItensServiceImpl;
+import br.edu.utfpr.pb.pw25s.server.shared.GenericResponse;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,7 +48,7 @@ public class RequestItensController extends CrudController<RequestItens, Request
         return modelMapper;
     }
 
-    /*@PostMapping("/adicionarNoCarrinho")
+    @PostMapping("/add")
     public ResponseEntity<GenericResponse> add(@Valid @RequestBody RequestItensDTO requestItens) {
 
         RequestItens requestItensEntity = modelMapper.map(requestItens, RequestItens.class);
@@ -59,8 +64,7 @@ public class RequestItensController extends CrudController<RequestItens, Request
             return ResponseEntity.noContent().build();
         }
     }
-*/
-    
+
     
     /*@GetMapping("/summaryBuy")
     public ResponseEntity<?> summaryBuy() {

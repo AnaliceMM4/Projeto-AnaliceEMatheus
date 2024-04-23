@@ -37,7 +37,7 @@ public class RequestItensServiceImpl extends CrudServiceImpl<RequestItens, Long>
         return requestItensRepository;
     }
 
-    @Override
+   @Override
     public RequestItens save(RequestItens entity) {
 
         Optional<Product> productOptional = productRepository.findById(entity.getProduct().getId());
@@ -45,12 +45,11 @@ public class RequestItensServiceImpl extends CrudServiceImpl<RequestItens, Long>
 
         RequestItens productItems = requestItensRepository.findByProductId(entity.getProduct().getId());
         Request request = entity.getRequest();
-
-        entity.setPreco(product.getPrice());
+       // entity.setPreco(product.getPrice());
         if (productItems != null) {
-            entity.setId(productItems.getId());
-            entity.setRequest(productItems.getRequest());
-            entity.setQuantidade(entity.getQuantidade() + productItems.getQuantidade());
+            entity.setRequest(request);
+            entity.setProduct(product);
+            entity.setQuantidade(entity.getQuantidade());
             entity.setPreco(product.getPrice().multiply(BigDecimal.valueOf(entity.getQuantidade())));
         }
 
